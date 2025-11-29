@@ -59,6 +59,12 @@ def get_highscores():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/healthz")
+def health_check():
+    return "ok", 200
+
+
+
 # Run server
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
