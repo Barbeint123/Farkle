@@ -13,7 +13,7 @@ export default function HigscoreSubmit(props) {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/add_user", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/get_highscores`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),

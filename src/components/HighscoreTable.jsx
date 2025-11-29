@@ -9,7 +9,7 @@ export default function HighscoreTable(props) {
     async function fetchHighscores() {
       setIsLoading(true)
       try {
-        const res = await fetch("http://localhost:5000/get_highscores")
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/get_highscores`)
         const data = await res.json()
         setHighscores(data)
       } catch (err) {
