@@ -22,7 +22,7 @@ export default function App() {
   const [showLeaderboard, setShowLeaderboard] = useState(false)
 
 
-  const TOTALROUNDS = 2
+  const TOTALROUNDS = 10
   const completedAllRounds = roundNumber >= TOTALROUNDS + 1
 
   const unlockedDice = dice.filter((die) => !die.isLocked)
