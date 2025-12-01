@@ -193,7 +193,7 @@ export default function App() {
   }
 
   function startAllOver() {
-    setDice(generateAllNewDice)
+    setDice(generateAllNewScoreableDice)
     setTotalScore(0)
     setTempScore(0)
     setRoundNumber(1)
