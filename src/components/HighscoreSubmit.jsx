@@ -7,9 +7,12 @@ export default function HigscoreSubmit(props) {
   async function addUser(formData) {
     const name = formData.get("username")
 
+    const time = new Date().toISOString();
+
     const userData = {
       name,
       score: props.score,
+      date: time
     }
 
     try {

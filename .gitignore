@@ -27,3 +27,5 @@ dist-ssr
 .env
 connect_example.py
 connect.py
+test.py
+test.ipynb
