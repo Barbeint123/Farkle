@@ -196,7 +196,7 @@ export default function App() {
     setDice(generateAllNewDice)
     setTotalScore(0)
     setTempScore(0)
-    setRoundNumber(0)
+    setRoundNumber(1)
   }
 
   const diceUI = dice.map((die) => (
