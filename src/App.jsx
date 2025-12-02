@@ -48,7 +48,6 @@ export default function App() {
       setTempScore(prevScore => prevScore + held_score)
 
       // reroll unheld dice
-      const animationKey = nanoid()
       setDice((prevDice) =>
         prevDice.map((die) => {
           if (!die.isHeld) {
@@ -83,17 +82,14 @@ export default function App() {
     const { score: held_score, remains: has_remains, counts: nonscoring_dice } = getScore()
 
     // find all held dice
-    let dice_held = []
-    dice.map((die) => {
-      if (die.isHeld && !die.isLocked) {
-        dice_held.push(die.value)
-      }
-    })
+    const dice_held = dice
+    .filter(die => die.isHeld && !die.isLocked)
+    .map(die => die.value)
 
     // If not busted, and held dice is eligible to score OR no dice are held, then
     // update totalScore, reset tempScore, iterate round, and reroll all dice
     if (!isBust && ((held_score > 0 && !has_remains) || dice_held.length === 0)) {
-      setTotalScore((prevScore) => prevScore + tempScore + getScore().score)
+      setTotalScore((prevScore) => prevScore + tempScore + held_score)
       setTempScore(0)
       setRoundNumber((prevRound) => prevRound + 1)
       setDice(generateAllNewScoreableDice)
@@ -106,17 +102,17 @@ export default function App() {
   }
 
   function findAndBlinkDice(nonscoring_dice) {
-    // find all nonscoring dice pips
+    // get which values (1-6) are non-scoring
     const unscoreable_values = Object.keys(nonscoring_dice)
     .filter((val) => nonscoring_dice[val] > 0)
 
-    // identify the ids of said dice
+    // find held, non-locked dice whose value is in that list
     const idsToBlink = dice
       .filter((die) => die.isHeld && !die.isLocked)
       .filter((die) => unscoreable_values.includes(String(die.value)))
       .map((die) => die.id)
 
-    // activate blink for the nonscoring dice
+    // blink those dice
     blinkDice(idsToBlink)
   }
 
@@ -153,13 +149,10 @@ export default function App() {
 
   function getScore() {
     // get the score of all held (non-locked) dice
-    let dice_held = []
+    const dice_held = dice
+    .filter(die => die.isHeld && !die.isLocked)
+    .map(die => die.value)
 
-    dice.map((die) => {
-      if (die.isHeld && !die.isLocked) {
-        dice_held.push(die.value)
-      }
-    })
     return score_dice(dice_held)
   }
 

@@ -44,8 +44,8 @@
 }
 
 .farkle-pre-title {
-  font-size: "20px";
-  letter-spacing: "2px";
+  font-size: 20px;
+  letter-spacing: 2px;
 }
 
 .red-text {
@@ -416,7 +416,7 @@
     margin: 0;
     border-radius: 0;
     box-shadow: none;
-    overflow-x: none;
+    overflow-x: hidden;
 }
   .grid-container {
     grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
